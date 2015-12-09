@@ -36,4 +36,3 @@ This will open the downloader utility which you can then use to install the list
 ## Contact
 * Authors: Trevor Blanchard, Brett Small, Samuel Peers, Stephan Harris
 * e-mail: umblanc3@myumanitoba.ca, umsmallb@myumanitoba.ca, peerss@myumanitoba.ca, stefanjharris@gmail.com
-x
