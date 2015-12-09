@@ -1,4 +1,4 @@
-SentimentMiner/Test/*
-SentimentMiner/Train/*
+SentimentMiner/Test
+SentimentMiner/Train
 *.txt
 *.json
