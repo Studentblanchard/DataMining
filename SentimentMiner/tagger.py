@@ -19,15 +19,11 @@ class Tagger:
 	## - Loads and cleans the reviews into a list
 	def load_words(self, folderpath):
 		filenames = glob.glob(folderpath)
-		limit = 0
 		for f in filenames:
 			with open(f, 'r') as infile:
 				text = infile.read()
 				text = utils.clean(text)
 				self.words.append([text])
-				limit += 1
-				if limit == 20:
-					break
 
 	## - Tags the reviews at the specified directory
 	def tag(self, folderpath, outpath):
