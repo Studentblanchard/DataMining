@@ -1,3 +1,4 @@
 SentimentMiner/Test
 SentimentMiner/Train/Data/
 *.txt
+*.json
