@@ -1,3 +1,9 @@
+## - Comp 4710 - Data Mining
+## - Prof: Carson Leunig
+## - Authors: Trevor Blanchard, Stepan Harris, Brett Small, Sam Peers
+## - Sentiment Miner
+## - December 10, 2015
+
 from miner import Miner
 import utils
 from timer import Timer

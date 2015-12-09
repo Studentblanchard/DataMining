@@ -1,4 +1,8 @@
+## - Comp 4710 - Data Mining
+## - Prof: Carson Leunig
+## - Authors: Trevor Blanchard, Stepan Harris, Brett Small, Sam Peers
 ## - Sentiment Miner
+## - December 10, 2015
 
 from collections import deque, OrderedDict
 import re
@@ -30,7 +34,7 @@ JJ_JJ = 4
 NN_JJ = 5
 RB_VB = 10
 
-## - Todo[add description]
+## - Matches and mines interesting patterns from a given text
 class Miner:
     def __init__(self):
         self.or_lambda = lambda q,p: p|q

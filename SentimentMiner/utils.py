@@ -1,7 +1,13 @@
+## - Comp 4710 - Data Mining
+## - Prof: Carson Leunig
+## - Authors: Trevor Blanchard, Stepan Harris, Brett Small, Sam Peers
+## - Sentiment Miner
+## - December 10, 2015
+
 import re, sys, json
 from collections import OrderedDict
 
-## - Todo[add description]
+## - A set of utilites
 
 def clean(text):
     text = re.sub(r'<.+/?>', ' ', text)# Remove html tags

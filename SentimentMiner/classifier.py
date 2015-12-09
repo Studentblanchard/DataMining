@@ -1,6 +1,12 @@
+## - Comp 4710 - Data Mining
+## - Prof: Carson Leunig
+## - Authors: Trevor Blanchard, Stepan Harris, Brett Small, Sam Peers
+## - Sentiment Miner
+## - December 10, 2015
+
 import json, glob, re, utils
 
-## - Todo[add description]
+## - Classifies text based on our learned data
 class Classifier:
 	def __init__(self):
 		self.pos_snip = []

@@ -1,9 +1,14 @@
+## - Comp 4710 - Data Mining
+## - Prof: Carson Leunig
+## - Authors: Trevor Blanchard, Stepan Harris, Brett Small, Sam Peers
+## - Sentiment Miner
+## - December 10, 2015
 
 import json, re, string, glob
 from collections import Counter, OrderedDict
 import nltk, sys, datetime, utils
 
-## - Todo[add description]
+## - Loads and tags a set of reviews at a given directory path
 class Tagger:
 	def __init__(self):
 		self.pos = dict()
