@@ -30,11 +30,18 @@ JJ_JJ = 4
 NN_JJ = 5
 RB_VB = 10
 
-
-
+## - Todo[add description]
 class Miner:
     def __init__(self):
         self.or_lambda = lambda q,p: p|q
+        self.count_t = 0
+        self.queue = deque([])
+        self.found = dict()
+
+    ## - Resets the miners internal variables
+    def reset(self):
+        self.count_t = 0
+        self.found = dict()
 
     ## - Matches a part of speech and returns the ID
     def switcher(self, pos):
@@ -50,40 +57,50 @@ class Miner:
             return OTHER_ID
 
     ## - Replaces the starting list attribute
-    def replace_start(self, queue, pos_code):
-        queue.popleft()
-        queue.appendleft(pos_code)
+    def replace_start(self, pos_code):
+        self.queue.popleft()
+        self.queue.appendleft(pos_code)
 
     ## - Replaces the ending list attribute
-    def replace_end(self, queue, pos_code):
-        queue.pop()
-        queue.append(pos_code)
+    def replace_end(self, pos_code):
+        self.queue.pop()
+        self.queue.append(pos_code)
 
     ## - matches interesting patterns in parsed POS, return 1 when match found, else 0
-    def findPatterns(self, queue, found, id_num):
-        matcher = reduce(self.or_lambda, [x[2] for x in queue])
+    def findPatterns(self):
+        matcher = reduce(self.or_lambda, [x[2] for x in self.queue])
         if matcher & JJ_NN:
-            if (queue[0][2] & OTHER_ID or queue[0][2] & VERB_ID) and queue[1][2] & ADJECTIVE_ID and queue[2][2] & NOUN_ID:
-                self.replace_start(queue, NOT_NN_RB_JJ)
-                found.update({id_num: list(queue)})
+            if (self.queue[0][2] & OTHER_ID or self.queue[0][2] & VERB_ID) and self.queue[1][2] & ADJECTIVE_ID and self.queue[2][2] & NOUN_ID:
+                self.replace_start(NOT_NN_RB_JJ)
+                self.found.update({self.count_t: list(self.queue)})
                 return 1
-            if queue[0][2] & NOUN_ID and queue[1][2] & ADJECTIVE_ID and not(queue[2][2] & NOUN_ID):
-                self.replace_end(queue, NOT_NN)
-                found.update({id_num: list(queue)})
+            if self.queue[0][2] & NOUN_ID and self.queue[1][2] & ADJECTIVE_ID and not(self.queue[2][2] & NOUN_ID):
+                self.replace_end(NOT_NN)
+                self.found.update({self.count_t: list(self.queue)})
                 return 1
         if matcher & RB_JJ:
-            if queue[0][2] & ADVERB_ID and queue[1][2] & ADJECTIVE_ID and not(queue[2][2] & NOUN_ID):
-                self.replace_end(queue, NOT_NN)
-                found.update({id_num: list(queue)})
+            if self.queue[0][2] & ADVERB_ID and self.queue[1][2] & ADJECTIVE_ID and not(self.queue[2][2] & NOUN_ID):
+                self.replace_end(NOT_NN)
+                self.found.update({self.count_t: list(self.queue)})
                 return 1
         if matcher & JJ_JJ:
-            if queue[0][2] & ADVERB_ID and queue[1][2] & ADJECTIVE_ID and not(queue[2][2] & NOUN_ID):
-                self.replace_end(queue, NOT_NN)
-                found.update({id_num: list(queue)})
+            if self.queue[0][2] & ADVERB_ID and self.queue[1][2] & ADJECTIVE_ID and not(self.queue[2][2] & NOUN_ID):
+                self.replace_end(NOT_NN)
+                self.found.update({self.count_t: list(self.queue)})
                 return 1
         if matcher & RB_VB:
-            if queue[0][2] & ADVERB_ID and queue[1][2] & VERB_ID:
-                self.replace_end(queue, ANY)
-                found.update({id_num: list(queue)})
+            if self.queue[0][2] & ADVERB_ID and self.queue[1][2] & VERB_ID:
+                self.replace_end(ANY)
+                self.found.update({self.count_t: list(self.queue)})
                 return 1
         return 0
+
+    ## - Mines patterns in a give text
+    def mine_text(self, full_text):
+        self.queue = deque([])
+        for key, word_pos in full_text.iteritems():
+    		self.queue.append([key, word_pos, self.switcher(word_pos)])
+    		if len(self.queue) > 3:
+    			self.queue.popleft()
+    		if len(self.queue) == 3:
+    			self.count_t += self.findPatterns()

@@ -1,4 +1,7 @@
-import re, sys
+import re, sys, json
+from collections import OrderedDict
+
+## - Todo[add description]
 
 def clean(text):
     text = re.sub(r'<.+/?>', ' ', text)# Remove html tags
@@ -12,3 +15,11 @@ def update_display(amt, total):
 
 def percentage(low, high):
     return int(100*(float(low)/high))
+
+def load_json(filepath):
+    with open(filepath,"r") as infile:
+        return json.load(infile, object_pairs_hook=OrderedDict)
+
+def dump_json(data,filepath):
+    with open(filepath,"w") as outfile:
+        json.dump(data, outfile, indent=4)

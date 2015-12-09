@@ -3,6 +3,7 @@ import json, re, string, glob
 from collections import Counter, OrderedDict
 import nltk, sys, datetime, utils
 
+## - Todo[add description]
 class Tagger:
 	def __init__(self):
 		self.pos = dict()
