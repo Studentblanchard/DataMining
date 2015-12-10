@@ -65,6 +65,15 @@ Enter a file name or a directory > Test/negativetestdata/
 ...
 ```
 
+## Datasource
+
+All of the testing and training data used was from the [Stanford link](http://ai.stanford.edu/~amaas/data/sentiment/
+).
+
+It has been extracted and placed in accessible locations for our program.
+
+
+
 ## Contact
 * Authors: Trevor Blanchard, Brett Small, Samuel Peers, Stefan Harris
 * e-mail: umblanc3@myumanitoba.ca, umsmallb@myumanitoba.ca, peerss@myumanitoba.ca, stefanjharris@gmail.com

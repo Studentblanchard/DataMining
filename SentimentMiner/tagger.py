@@ -1,5 +1,5 @@
 ## - Comp 4710 - Data Mining
-## - Prof: Carson Leunig
+## - Prof: Dr. Carson K. Leung
 ## - Authors: Trevor Blanchard, Stefan Harris, Brett Small, Sam Peers
 ## - Sentiment Miner
 ## - December 10, 2015
