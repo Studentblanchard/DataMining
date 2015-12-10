@@ -1,6 +1,6 @@
 ## - Comp 4710 - Data Mining
 ## - Prof: Carson Leunig
-## - Authors: Trevor Blanchard, Stepan Harris, Brett Small, Sam Peers
+## - Authors: Trevor Blanchard, Stefan Harris, Brett Small, Sam Peers
 ## - Sentiment Miner
 ## - December 10, 2015
 
@@ -16,9 +16,9 @@ class Classifier:
 	def load(self):
 		pos = dict()
 		neg = dict()
-		with open("positive_POS.txt","r") as infile:
+		with open("Train/positive_POS_dict.json","r") as infile:
 			pos = json.load(infile)
-		with open("negative_POS.txt", "r") as infile:
+		with open("Train/negative_POS_dict.json", "r") as infile:
 			neg = json.load(infile)
 		# make the tagged dictionary into a string
 		for _, value in pos.iteritems():
@@ -51,20 +51,35 @@ class Classifier:
 		negc = 0
 		posc = 0
 		undc = 0
+		total = 0
 		filenames = glob.glob(folderpath)
+		totalnumfiles = len(filenames)
+
 		print("Testing data set")
-		print("Number of files:{0}".format(len(filenames)))
+		print("Number of files:{0}".format(totalnumfiles))
+
+		if totalnumfiles == 0:
+			print("No files to classify, exiting...")
+			return
+
 		for f in filenames:
 			with open(f, 'r') as infile:
 				clsfy = self.classify(infile)
+				total += clsfy
 				if clsfy > 0:
 					posc += 1
-				if clsfy < 0:
+				elif clsfy < 0:
 					negc += 1
-				if clsfy == 0:
+				elif clsfy == 0:
 					undc += 1
 
-		print("Results...")
-		print("Percentage of positve classifications: %{0}".format(utils.percentage(posc, len(filenames))))
-		print("Percentage of negative classifications: %{0}".format(utils.percentage(negc, len(filenames))))
-		print("Percentage of undertermined classifications: %{0}".format(utils.percentage(undc, len(filenames))))
+		results = """
+Results...
+Average classification: {0}
+Percentage of positve classifications: %{1}
+Percentage of negative classifications: %{2}
+Percentage of undertermined classifications: %{3}
+		""".format(total/totalnumfiles,utils.percentage(posc, len(filenames)),utils.percentage(negc, len(filenames)),utils.percentage(undc, len(filenames)))
+		print results
+
+		utils.print_to_file("testResults.txt", "\nFolderpath: {0}\nNumber of Files: {1}\n{2}".format(folderpath,totalnumfiles,results))

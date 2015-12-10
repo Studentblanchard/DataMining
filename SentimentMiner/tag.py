@@ -1,6 +1,6 @@
 ## - Comp 4710 - Data Mining
 ## - Prof: Carson Leunig
-## - Authors: Trevor Blanchard, Stepan Harris, Brett Small, Sam Peers
+## - Authors: Trevor Blanchard, Stefan Harris, Brett Small, Sam Peers
 ## - Sentiment Miner
 ## - December 10, 2015
 
@@ -15,11 +15,11 @@ myTimer.start_timer()
 
 print("\nFinding negative POS\n")
 
-myTagger.tag("Train/Data/aclImdb/train/neg/*.txt", "neg_pos.txt")
+myTagger.tag("Train/neg/*.txt", "Train/neg_pos.txt")
 
 print("\nFinding positive POS\n")
 
-myTagger.tag("Train/Data/aclImdb/train/pos/*.txt", "pos_pos.txt")
+myTagger.tag("Train/pos/*.txt", "Train/pos_pos.txt")
 
 myTimer.end_timer()
 myTimer.summary()

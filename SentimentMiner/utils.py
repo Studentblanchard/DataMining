@@ -1,6 +1,6 @@
 ## - Comp 4710 - Data Mining
 ## - Prof: Carson Leunig
-## - Authors: Trevor Blanchard, Stepan Harris, Brett Small, Sam Peers
+## - Authors: Trevor Blanchard, Stefan Harris, Brett Small, Sam Peers
 ## - Sentiment Miner
 ## - December 10, 2015
 
@@ -29,3 +29,7 @@ def load_json(filepath):
 def dump_json(data,filepath):
     with open(filepath,"w") as outfile:
         json.dump(data, outfile, indent=4)
+
+def print_to_file(file,text):
+    with open(file,"a") as outfile:
+        outfile.write(text)

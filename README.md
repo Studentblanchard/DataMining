@@ -29,10 +29,42 @@ To install these packages start up your python interpreter and run
 ```
 This will open the downloader utility which you can then use to install the listed models.
 
+## Usage
 
-## Version
-* Version 1.0
+#### tag.py
+This is used to generate the trained data. In particular it will generate `pos_pos.txt` and `neg_pos.txt`. This data is later used by the miner to find our interesting patterns.
+
+To run the tagger...
+```
+$ python tag.py
+```
+
+#### mine.py
+This is used to generate the trained data. In particular it will generate `positive_POS_dict.json` and `negative_POS_dict_pos.json`. This data is later used by the classifier to classify test data.
+
+To run the miner...
+```
+$ python mine.py
+```
+
+#### classify.py
+This is used to test the training data. In particular it will run the classifier on `Test/positivetestdata/` and `Test/negativetestdata/`. The results are published in `testResults.txt`.
+
+To run the classifier...
+```
+$ python classify.py
+```
+
+#### interactive.py
+An interactive classifier. It will publish the results to `testResults.txt`.
+
+To run the interactive classifier...
+```
+$ python interactive.py
+Enter a file name or a directory > Test/negativetestdata/
+...
+```
 
 ## Contact
-* Authors: Trevor Blanchard, Brett Small, Samuel Peers, Stephan Harris
+* Authors: Trevor Blanchard, Brett Small, Samuel Peers, Stefan Harris
 * e-mail: umblanc3@myumanitoba.ca, umsmallb@myumanitoba.ca, peerss@myumanitoba.ca, stefanjharris@gmail.com
